@@ -28,8 +28,8 @@ const  [tours,setTours] = useState([]);
               <img src={image} alt={name} />
               <div>
                 <h4>{name}</h4>
-                <h2>{info}</h2>
-                <h2>{price}</h2>
+                <p>{info}</p>
+                <p>{price}</p>
               </div>
             </li>
           );
