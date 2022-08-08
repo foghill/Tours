@@ -1,58 +1,46 @@
-import React, { useState, useEffect } from 'react'
-import Loading from './Loading'
-import Tours from './Tours'
+import React, { useState, useEffect } from "react";
+import Loading from "./Loading";
+import Tours from "./Tours";
 // ATTENTION!!!!!!!!!!
 // I SWITCHED TO PERMANENT DOMAIN
-const url = 'https://course-api.com/react-tours-project'
-
+const url = "https://course-api.com/react-tours-project";
 
 function App() {
-const [loading,setLoading] =useState(true);
-const  [tours,setTours] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [tours, setTours] = useState([]);
 
+  const fetchTours = async () => {
+    setLoading(true);
 
-
-  const getTours = async () => {
-    const response = await fetch(url);
-    const tours = await response.json();
-    setTours(tours);
-    console.log(tours);
+    try {
+      const response = await fetch(url);
+      const tours = await response.json();
+      setLoading(false);
+      setTours(tours);
+      console.log(tours);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
   };
 
   useEffect(() => {
-    getTours();
+    fetchTours();
   }, []);
 
-
-  if(loading) {
+  if (loading) {
     return (
       <main>
         <Loading />
       </main>
-    )
+    );
   }
-  
+
   return (
-    <>
-      <h3>Tours</h3>
-      <ul>
-        {tours.map((tour) => {
-          const { id, name, info, image, price } = tour;
-          return (
-            <li key={id}>
-              <img src={image} alt={name} />
-              <div>
-                <h4>{name}</h4>
-                <p>{info}</p>
-                <p>{price}</p>
-              </div>
-            </li>
-          );
-        })}
-        </ul>
-    </>
+    <main>
+      <Tours />
+    </main>
   );
-};
+}
 
-
-export default App
+export default App;
