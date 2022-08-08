@@ -9,7 +9,7 @@ const  [tours,setTours] = useState([]);
 
   const getTours = async () => {
     const response = await fetch(url);
-    const users = await response.json();
+    const tours = await response.json();
     setTours(tours);
     console.log(tours);
   };
@@ -20,7 +20,7 @@ const  [tours,setTours] = useState([]);
   return (
     <>
       <h3>Tours</h3>
-      <ul className='users'>
+      <ul>
         {tours.map((tour) => {
           const { id, name, info, image, price } = tour;
           return (
@@ -34,7 +34,7 @@ const  [tours,setTours] = useState([]);
             </li>
           );
         })}
-      </ul>
+        </ul>
     </>
   );
 };
